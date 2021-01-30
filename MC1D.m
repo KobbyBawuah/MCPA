@@ -1,4 +1,3 @@
-function [] = MC()
 
 close all;
 %UNTITLED Summary of this function goes here
@@ -76,6 +75,4 @@ t=0;
            
 
     end
-end
-
 
