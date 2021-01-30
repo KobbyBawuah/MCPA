@@ -30,7 +30,8 @@ n=0;
 xInitial=0
 xPosition = 0;
 Velocity = 0;
-Ps = 0.05;
+%Ps = 0.05;
+Ps = 1-exp(-dt/20)
 driftV = 0;
 t=0;
 
@@ -46,14 +47,14 @@ t=0;
          if(prob<=Ps)
              Velocity(i) = 0;%starting v
          else 
-             Velocity(i) = Velocity(i-1) + ((C.q_0*force)/C.m_0)*dt;
+             Velocity(i) = Velocity(i-1) + ((C.q_0*force)/C.m_0)*dt;%calculating v
          end
          
-         driftV(i) = mean(Velocity);
-         xPosition(i) = xPosition(i-1) + Velocity(i-1)*dt;
-         t(i)= t(i-1)+1;
+         driftV(i) = mean(Velocity);    %drift calculation
+         xPosition(i) = xPosition(i-1) + Velocity(i-1)*dt;      %position array
+         t(i)= t(i-1)+1;    %time array
          
-         title("V vs time");
+         title(sprintf("V vs time. Average =%0.5f",driftV(i)));
          subplot(3,1,1)
          plot(t,Velocity,'b')
          plot(t,driftV,'ro')
